@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Управление авторизацией.                                                    *
+*  РЈРїСЂР°РІР»РµРЅРёРµ Р°РІС‚РѕСЂРёР·Р°С†РёРµР№.                                                    *
 *                                                                              *
 *  Copyright (C) 2012 Kirill Chuvilin.                                         *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -28,48 +28,48 @@
 *                                                                              *
 *******************************************************************************/
 
-require_once 'include.php'; // пути для подключаемых файлов
-require_once 'config.php'; // найтройки
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'include.php'; // РїСѓС‚Рё РґР»СЏ РїРѕРґРєР»СЋС‡Р°РµРјС‹С… С„Р°Р№Р»РѕРІ
+require_once 'config.php'; // РЅР°Р№С‚СЂРѕР№РєРё
+require_once 'lib/punbb.php'; // СЂР°Р±РѕС‚Р° СЃ punbb
 
 
-switch ($_GET['action']) { // в зависимости от указанного типа действия
+switch ($_GET['action']) { // РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СѓРєР°Р·Р°РЅРЅРѕРіРѕ С‚РёРїР° РґРµР№СЃС‚РІРёСЏ
 	case 'in':
 	case 'out':
-		$action = $_GET['action']; // указанный корректный тип действия
+		$action = $_GET['action']; // СѓРєР°Р·Р°РЅРЅС‹Р№ РєРѕСЂСЂРµРєС‚РЅС‹Р№ С‚РёРї РґРµР№СЃС‚РІРёСЏ
 		break;
 	default:
-		$action = null; // нет действия
+		$action = null; // РЅРµС‚ РґРµР№СЃС‚РІРёСЏ
 }
 
 
-$userEmail = General::trim($_GET['email']); // e-mail для логина
-$userPassword = General::trim($_GET['password']); // пароль для логина
+$userEmail = General::trim($_GET['email']); // e-mail РґР»СЏ Р»РѕРіРёРЅР°
+$userPassword = General::trim($_GET['password']); // РїР°СЂРѕР»СЊ РґР»СЏ Р»РѕРіРёРЅР°
 
 
-switch ($action) { // в зависимости от типа действия
+switch ($action) { // РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° РґРµР№СЃС‚РІРёСЏ
 case 'in':
-	if (Punbb::$user->isGuest()) Punbb::authenticateUser(Punbb::getAuthenticatedUser($userEmail, $userPassword)); // получить подходящего пользователя, если пользователь еще не авторизован
-	switch (General::$contentType) { // в зависимости от типа запрашиваемых данных
+	if (Punbb::$user->isGuest()) Punbb::authenticateUser(Punbb::getAuthenticatedUser($userEmail, $userPassword)); // РїРѕР»СѓС‡РёС‚СЊ РїРѕРґС…РѕРґСЏС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РµС‰Рµ РЅРµ Р°РІС‚РѕСЂРёР·РѕРІР°РЅ
+	switch (General::$contentType) { // РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° Р·Р°РїСЂР°С€РёРІР°РµРјС‹С… РґР°РЅРЅС‹С…
 	case 'json':
-		echo json_encode(Punbb::$user->isGuest() ? false : Punbb::$user); // вывести результат авторизации
+		echo json_encode(Punbb::$user->isGuest() ? false : Punbb::$user); // РІС‹РІРµСЃС‚Рё СЂРµР·СѓР»СЊС‚Р°С‚ Р°РІС‚РѕСЂРёР·Р°С†РёРё
 		exit;
 	case 'html':
 	default:
-		if (Punbb::$user->isGuest()) { // если авторизация прошла неуспешно
-			General::setNextRedirect(General::$redirect); // в следующий раз адрес перенаправления будет тот же
-			Templates::$page = 'login'; // страница авторизации
-			Templates::generatePage(); // сгенерировать страницу
-		} else { // если авторизация успешна
-			General::redirect(); // перейти по редиректу
+		if (Punbb::$user->isGuest()) { // РµСЃР»Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЏ РїСЂРѕС€Р»Р° РЅРµСѓСЃРїРµС€РЅРѕ
+			General::setNextRedirect(General::$redirect); // РІ СЃР»РµРґСѓСЋС‰РёР№ СЂР°Р· Р°РґСЂРµСЃ РїРµСЂРµРЅР°РїСЂР°РІР»РµРЅРёСЏ Р±СѓРґРµС‚ С‚РѕС‚ Р¶Рµ
+			Templates::$page = 'login'; // СЃС‚СЂР°РЅРёС†Р° Р°РІС‚РѕСЂРёР·Р°С†РёРё
+			Templates::generatePage(); // СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ
+		} else { // РµСЃР»Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЏ СѓСЃРїРµС€РЅР°
+			General::redirect(); // РїРµСЂРµР№С‚Рё РїРѕ СЂРµРґРёСЂРµРєС‚Сѓ
 		}
 	}
 	break;
 case 'out':
-//		if (Punbb::$user->isGuest()) General::redirect(); // перейти по редиректу, если пользователь не авторизован
+//		if (Punbb::$user->isGuest()) General::redirect(); // РїРµСЂРµР№С‚Рё РїРѕ СЂРµРґРёСЂРµРєС‚Сѓ, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ Р°РІС‚РѕСЂРёР·РѕРІР°РЅ
 	break;
 default:
-//		if (!Punbb::$user->isGuest()) General::redirect(); // перейти по редиректу, если пользователь уже авторизован
+//		if (!Punbb::$user->isGuest()) General::redirect(); // РїРµСЂРµР№С‚Рё РїРѕ СЂРµРґРёСЂРµРєС‚Сѓ, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓР¶Рµ Р°РІС‚РѕСЂРёР·РѕРІР°РЅ
 	switch (General::$contentType) {
 	case 'json':
 		echo json_encode(Punbb::$user);

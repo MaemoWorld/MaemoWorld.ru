@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Информация о поставщиках софта.                                             *
+*  РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РїРѕСЃС‚Р°РІС‰РёРєР°С… СЃРѕС„С‚Р°.                                             *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -28,29 +28,29 @@
 *                                                                              *
 *******************************************************************************/
 
-require_once 'include.php'; // пути для подключаемых файлов
-require_once 'config.php'; // найтройки
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'include.php'; // РїСѓС‚Рё РґР»СЏ РїРѕРґРєР»СЋС‡Р°РµРјС‹С… С„Р°Р№Р»РѕРІ
+require_once 'config.php'; // РЅР°Р№С‚СЂРѕР№РєРё
+require_once 'lib/punbb.php'; // СЂР°Р±РѕС‚Р° СЃ punbb
 
 
-if (isset($_REQUEST['name'])): // если указано имя
-	$tags = Punbb::getTagsbyName($_REQUEST['name']); // идентификатор тэга поставщика
-	if (count($tags) > 0) { // если есть тэги с таким id
+if (isset($_REQUEST['name'])): // РµСЃР»Рё СѓРєР°Р·Р°РЅРѕ РёРјСЏ
+	$tags = Punbb::getTagsbyName($_REQUEST['name']); // РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ С‚СЌРіР° РїРѕСЃС‚Р°РІС‰РёРєР°
+	if (count($tags) > 0) { // РµСЃР»Рё РµСЃС‚СЊ С‚СЌРіРё СЃ С‚Р°РєРёРј id
 		$tagIds = array_keys($tags);
 		$yagId = $tagIds[0];
-	} else { // если нет тэгов с таким id
+	} else { // РµСЃР»Рё РЅРµС‚ С‚СЌРіРѕРІ СЃ С‚Р°РєРёРј id
 		$tadId = false;
 	}
 else:
 	$tagId = false;
 endif;
 
-if (isset($_REQUEST['catalog'])): // если указан каталог
-	$catalog = $_REQUEST['catalog']; // идентификатор каталога
+if (isset($_REQUEST['catalog'])): // РµСЃР»Рё СѓРєР°Р·Р°РЅ РєР°С‚Р°Р»РѕРі
+	$catalog = $_REQUEST['catalog']; // РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РєР°С‚Р°Р»РѕРіР°
 else:
-	$catalog = 'apps'; // по умолчанию идем в приложения
+	$catalog = 'apps'; // РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РёРґРµРј РІ РїСЂРёР»РѕР¶РµРЅРёСЏ
 endif;
 
-$domain = $_SERVER['HTTP_HOST']; // имя домена
-Header('Location: http://'.$domain.'/navigator.php?catalog='.$catalog.'&tags%5B%5D='.$tagId); // редирект
+$domain = $_SERVER['HTTP_HOST']; // РёРјСЏ РґРѕРјРµРЅР°
+Header('Location: http://'.$domain.'/navigator.php?catalog='.$catalog.'&tags%5B%5D='.$tagId); // СЂРµРґРёСЂРµРєС‚
 exit;

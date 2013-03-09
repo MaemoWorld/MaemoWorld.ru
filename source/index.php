@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Основная страница.                                                          *
+*  РћСЃРЅРѕРІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°.                                                          *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -31,7 +31,7 @@
 require_once './include/config.php';
 require_once './include/lib/punbb.php';
 
-switch (General::$contentType) { // в зависимости от типа запрашиваемых данных
+switch (General::$contentType) { // РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° Р·Р°РїСЂР°С€РёРІР°РµРјС‹С… РґР°РЅРЅС‹С…
 case 'json':
 	echo 'content-type: '.general::$contentType.', viewport: '.general::$viewport.', redirect: '.general::$redirect.'<br><br>';
 	echo json_encode(Punbb::$user).'<br><br>';
@@ -39,5 +39,5 @@ case 'json':
 	exit;
 case 'html':
 default:
-	Template::generatePage('index'); // сгенерировать страницу
+	Template::generatePage('index'); // СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ
 }

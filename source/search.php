@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Ñêðèïò ïîèñêà.                                                              *
+*  Ð¡ÐºÑ€Ð¸Ð¿Ñ‚ Ð¿Ð¾Ð¸ÑÐºÐ°.                                                              *
 *                                                                              *
 *  Copyright (C) 2012 Kirill Chuvilin.                                         *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -28,26 +28,26 @@
 *                                                                              *
 *******************************************************************************/
 
-$domain = $_SERVER['HTTP_HOST']; // èìÿ äîìåíà
+$domain = $_SERVER['HTTP_HOST']; // Ð¸Ð¼Ñ Ð´Ð¾Ð¼ÐµÐ½Ð°
 
-if (isset($_REQUEST['location'])): // åñëè óêàçàíà îáëàñòü ïîèñêà
-	$location = strtolower($_REQUEST['location']); // îáëàñòü ïîèñêà
+if (isset($_REQUEST['location'])): // ÐµÑÐ»Ð¸ ÑƒÐºÐ°Ð·Ð°Ð½Ð° Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ Ð¿Ð¾Ð¸ÑÐºÐ°
+	$location = strtolower($_REQUEST['location']); // Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ Ð¿Ð¾Ð¸ÑÐºÐ°
 else:
-	$location = 'google'; // îáëàñòü ïîèñêà ïî óìîë÷àíèþ
+	$location = 'google'; // Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ Ð¿Ð¾Ð¸ÑÐºÐ° Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ
 endif;
 
-if ($location == 'google'): // åñëè ïîèñê â google
-	if (isset($_REQUEST['site'])): // åñëè óêàçàí ñàéò íà êîòîðîì èñêàòü
-		$site = $_REQUEST['site']; // ñàéò
+if ($location == 'google'): // ÐµÑÐ»Ð¸ Ð¿Ð¾Ð¸ÑÐº Ð² google
+	if (isset($_REQUEST['site'])): // ÐµÑÐ»Ð¸ ÑƒÐºÐ°Ð·Ð°Ð½ ÑÐ°Ð¹Ñ‚ Ð½Ð° ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼ Ð¸ÑÐºÐ°Ñ‚ÑŒ
+		$site = $_REQUEST['site']; // ÑÐ°Ð¹Ñ‚
 	else:
-		$site = $domain	; // èùåì â òåêóùåì äîìåíå
+		$site = $domain	; // Ð¸Ñ‰ÐµÐ¼ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¼ Ð´Ð¾Ð¼ÐµÐ½Ðµ
 	endif;
 endif;
 
-$query = $_REQUEST['query']; // çàïðîñ ïîèñêà
+$query = $_REQUEST['query']; // Ð·Ð°Ð¿Ñ€Ð¾Ñ Ð¿Ð¾Ð¸ÑÐºÐ°
 
-if ($location == 'google'): // åñëè ïîèñê â google
-//	Header('Location: http://www.google.ru/search?q='.$query.' site:'.$site.'&ie=utf-8&oe=utf-8&aq=t&rls='.$domain); // ðåäèðåêò
+if ($location == 'google'): // ÐµÑÐ»Ð¸ Ð¿Ð¾Ð¸ÑÐº Ð² google
+//	Header('Location: http://www.google.ru/search?q='.$query.' site:'.$site.'&ie=utf-8&oe=utf-8&aq=t&rls='.$domain); // Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚
 	Header('Location: http://www.google.com/webhp?rls='.$domain.'&domains='.$site.'&ie=UTF-8&oe=UTF-8&sitesearch='.$site.'#sclient=psy-ab&sitesearch='.$site.'&q='.$query.'&cx=partner-pub-0247061343724296:9160314993');
 	exit;
 //http://www.google.com/webhp?domains=http://meegos.ru&ie=UTF-8&oe=UTF-8&btnG=Search&sitesearch=http://meegos.ru#sclient=psy-ab&domains=http:%2F%2Fmeegos.ru&q=request&sitesearch=http:%2F%2Fmeegos.ru&fp=1

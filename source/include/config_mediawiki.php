@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Íàñòðîêè MediaWiki.                                                         *
+*  ÐÐ°ÑÑ‚Ñ€Ð¾ÐºÐ¸ MediaWiki.                                                         *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -29,6 +29,6 @@
 *******************************************************************************/
 
 require_once 'config_general.php';
-$config['mediawiki'] = array(); // íàñòðîéêè mediawiki
-$config['mediawiki']['url'] = $config['host_url'].'/wiki'; // ññûëêà íà mediawiki
-$config['mediawiki']['dir'] = $config['root_dir'].'/wiki'; // êàòàëîã mediawiki
+$config['mediawiki'] = array(); // Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ mediawiki
+$config['mediawiki']['url'] = $config['host_url'].'/wiki'; // ÑÑÑ‹Ð»ÐºÐ° Ð½Ð° mediawiki
+$config['mediawiki']['dir'] = $config['root_dir'].'/wiki'; // ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³ mediawiki

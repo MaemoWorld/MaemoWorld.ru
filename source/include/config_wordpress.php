@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Íàñòðîêè wordpress.                                                         *
+*  ÐÐ°ÑÑ‚Ñ€Ð¾ÐºÐ¸ wordpress.                                                         *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -29,6 +29,6 @@
 *******************************************************************************/
 
 require_once 'config_general.php';
-$config['wordpress'] = array(); // íàñòðîéêè wordpress
-$config['wordpress']['url'] = $config['host_url'].'/wiki'; // ññûëêà íà wordpress
-$config['wordpress']['dir'] = $config['root_dir'].'/wiki'; // êàòàëîã wordpress
+$config['wordpress'] = array(); // Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ wordpress
+$config['wordpress']['url'] = $config['host_url'].'/wiki'; // ÑÑÑ‹Ð»ÐºÐ° Ð½Ð° wordpress
+$config['wordpress']['dir'] = $config['root_dir'].'/wiki'; // ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³ wordpress

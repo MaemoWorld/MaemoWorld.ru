@@ -1,19 +1,30 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Класс, инкапсулирующий работу с каталогои на narod.yandex.ru.               *
-*  v1.01                                                                       *
-*  Совместимость: PHP 5                                                        *
-*  by Кирилл Чувилин aka KiRiK (kirik-ch.ru)                                   *
+*  Класс каталога файлов на narod.yandex.ru.                                   *
 *                                                                              *
-*  Реализован в рамках проекта MaemoWorld.ru                                   *
+*  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
+*  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
 *                                                                              *
-*  Запрещено использование библиотеки или ее фрагментов:                       *
-*  - в коммерческих проектах                                                   *
-*  - без указания информации об авторстве                                      *
+*  This file is a part of the MaemoWorld.ru project.                           *
+*  https://github.com/MaemoWorld/MaemoWorld.ru                                 *
 *                                                                              *
-*  Для поддержки развития проекта или  просто благодарности можете пополнить   *
-*  яндекс-счет 41001384352607.                                                 *
+*  $QT_BEGIN_LICENSE:GPL$                                                      *
+*                                                                              *
+*  GNU General Public License Usage                                            *
+*  Alternatively, this file may be used under the terms of the GNU General     *
+*  Public License version 3.0 as published by the Free Software Foundation     *
+*  and appearing in the file LICENSE.GPL included in the packaging of this     *
+*  file. Please review the following information to ensure the GNU General     *
+*  Public License version 3.0 requirements will be met:                        *
+*  http://www.gnu.org/copyleft/gpl.html.                                       *
+*                                                                              *
+*  This file is distributed in the hope that it will be useful, but WITHOUT    *
+*  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or       *
+*  FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for    *
+*  more details.                                                               *
+*                                                                              *
+*  $QT_END_LICENSE$                                                            *
 *                                                                              *
 *******************************************************************************/
 
@@ -66,4 +77,3 @@ class YandexCatalog {
 	private $password; // пароль
 	private $fileList; // массив файлов
 }
-?>

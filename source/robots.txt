@@ -1,0 +1,30 @@
+# Поиск Яндекса по блогам
+User-agent: YandexBlog
+Disallow:
+# Все остальные
+User-agent: *
+Disallow: /blog/wp-login.php
+Disallow: /blog/wp-register.php
+Disallow: /blog/xmlrpc.php
+Disallow: /blog/wp-admin/
+Disallow: /blog/wp-includes/
+Disallow: /blog/wp-content/
+Disallow: /blog/trackback/
+Disallow: /blog/feed/
+Disallow: /blog/comments/
+Disallow: /blog/?feed=
+Disallow: /wp-login.php
+Disallow: /wp-register.php
+Disallow: /xmlrpc.php
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/
+Disallow: /trackback/
+Disallow: /feed/
+Disallow: /comments/
+Disallow: */trackback/
+Disallow: */feed/
+Disallow: */comments/
+Disallow: /?feed=
+Allow: /wp-content/uploads/
+Allow: /blog/wp-content/uploads/

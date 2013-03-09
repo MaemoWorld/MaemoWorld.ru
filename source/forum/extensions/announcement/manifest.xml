@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension SYSTEM "ext-1.0.dtd">
+
+<extension engine="1.0">
+	<id>announcement</id>
+	<title>Announcement</title>
+	<version>0.1</version>
+	<description>Add possibility to set topics as announce.</description>
+	<author>Valentin Day</author>
+	<minversion>1.3.0</minversion>
+	<maxtestedon>1.3.4</maxtestedon>
+
+	<note type="uninstall" timing="pre">Note : announce topics will be mark as sticky</note>
+
+	<uninstall><![CDATA[
+$query = array(
+	'UPDATE' => 'topics',
+	'SET' => 'sticky=1',
+	'WHERE' => 'sticky=2'
+);
+$forum_db->query_build($query) or error(__FILE__, __LINE__);
+	]]></uninstall>
+
+	<hooks>
+
+		<hook id="vt_pre_header_load"><![CDATA[
+if ($forum_page['is_admmod'])
+{
+
+	if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+		include_once $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+	else
+		include_once $ext_info['path'].'/lang/English/'.$ext_info['id'].'.php';
+
+	$pop_array = array();
+	foreach ($forum_page['main_foot_options'] as $key => $value) {
+		$pop_array[$key] = $value;
+		if ($key == 'sticky') break;
+	}
+
+	$pop_array['announce'] = (($cur_topic['sticky'] == '2') ? '<span><a class="mod-option" href="'.forum_link($forum_url['unannounce'], array($cur_topic['forum_id'], $id, generate_form_token('unannounce'.$id))).'">'.$lang_announcement['Unmark announce'].'</a></span>' : '<span><a class="mod-option" href="'.forum_link($forum_url['announce'], array($cur_topic['forum_id'], $id, generate_form_token('announce'.$id))).'">'.$lang_announcement['Mark announce'].'</a></span>');
+
+	$forum_page['main_foot_options'] = array_merge($pop_array, $forum_page['main_foot_options']);
+}
+		]]></hook>
+
+		<hook id="mr_new_action"><![CDATA[
+// Announce a topic
+if (isset($_GET['announce']))
+{
+	$announce = intval($_GET['announce']);
+	if ($announce < 1)
+		message($lang_common['Bad request']);
+
+	// We validate the CSRF token. If it's set in POST and we're at this point, the token is valid.
+	// If it's in GET, we need to make sure it's valid.
+	if (!isset($_POST['csrf_token']) && (!isset($_GET['csrf_token']) || $_GET['csrf_token'] !== generate_form_token('announce'.$announce)))
+		csrf_confirm_form();
+
+	($hook = get_hook('mr_announce_topic_selected')) ? eval($hook) : null;
+
+	// Get the topic subject
+	$query = array(
+		'SELECT'	=> 't.subject',
+		'FROM'		=> 'topics AS t',
+		'WHERE'		=> 't.id='.$announce.' AND forum_id='.$fid
+	);
+
+	($hook = get_hook('mr_announce_topic_qr_get_subject')) ? eval($hook) : null;
+	$result = $forum_db->query_build($query) or error(__FILE__, __LINE__);
+
+	if (!$forum_db->num_rows($result))
+		message($lang_common['Bad request']);
+
+	$subject = $forum_db->result($result);
+
+	$query = array(
+		'UPDATE'	=> 'topics',
+		'SET'		=> 'sticky=2',
+		'WHERE'		=> 'id='.$announce.' AND forum_id='.$fid
+	);
+
+	($hook = get_hook('mr_announce_topic_qr_announce_topic')) ? eval($hook) : null;
+	$forum_db->query_build($query) or error(__FILE__, __LINE__);
+
+	($hook = get_hook('mr_announce_topic_pre_redirect')) ? eval($hook) : null;
+
+	if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+		include_once $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+	else
+		include_once $ext_info['path'].'/lang/English/'.$ext_info['id'].'.php';
+
+	redirect(forum_link($forum_url['topic'], array($announce, sef_friendly($subject))), $lang_announcement['Announce topic redirect']);
+}
+
+
+// Unannounce a topic
+else if (isset($_GET['unannounce']))
+{
+	$unannounce = intval($_GET['unannounce']);
+	if ($unannounce < 1)
+		message($lang_common['Bad request']);
+
+	// We validate the CSRF token. If it's set in POST and we're at this point, the token is valid.
+	// If it's in GET, we need to make sure it's valid.
+	if (!isset($_POST['csrf_token']) && (!isset($_GET['csrf_token']) || $_GET['csrf_token'] !== generate_form_token('unannounce'.$unannounce)))
+		csrf_confirm_form();
+
+	($hook = get_hook('mr_unannounce_topic_selected')) ? eval($hook) : null;
+
+	// Get the topic subject
+	$query = array(
+		'SELECT'	=> 't.subject',
+		'FROM'		=> 'topics AS t',
+		'WHERE'		=> 't.id='.$unannounce.' AND forum_id='.$fid
+	);
+
+	($hook = get_hook('mr_unannounce_topic_qr_get_subject')) ? eval($hook) : null;
+	$result = $forum_db->query_build($query) or error(__FILE__, __LINE__);
+
+	if (!$forum_db->num_rows($result))
+		message($lang_common['Bad request']);
+
+	$subject = $forum_db->result($result);
+
+	$query = array(
+		'UPDATE'	=> 'topics',
+		'SET'		=> 'sticky=0',
+		'WHERE'		=> 'id='.$unannounce.' AND forum_id='.$fid
+	);
+
+	($hook = get_hook('mr_unannounce_topic_qr_unannounce_topic')) ? eval($hook) : null;
+	$forum_db->query_build($query) or error(__FILE__, __LINE__);
+
+	($hook = get_hook('mr_unannounce_topic_pre_redirect')) ? eval($hook) : null;
+
+	if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+		include_once $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+	else
+		include_once $ext_info['path'].'/lang/English/'.$ext_info['id'].'.php';
+
+	redirect(forum_link($forum_url['topic'], array($unannounce, sef_friendly($subject))), $lang_announcement['Unannounce topic redirect']);
+}
+		]]></hook>
+
+		<hook id="vf_topic_loop_normal_topic_pre_item_title_status_merge"><![CDATA[
+if ($cur_topic['sticky'] == '2')
+{
+
+	if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+		include_once $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+	else
+		include_once $ext_info['path'].'/lang/English/'.$ext_info['id'].'.php';
+
+	$forum_page['item_title_status'] = array_merge(array('sticky' => '<em class="announce">'.$lang_announcement['Announce'].'</em>'), $forum_page['item_title_status']);
+	$forum_page['item_status']['sticky'] = 'announce';
+}
+		]]></hook>
+
+		<hook id="hd_head"><![CDATA[
+
+// Incuding styles for announcement
+if (defined('FORUM_PAGE') && 'viewforum' == substr(FORUM_PAGE, 0, 9))
+{
+	if (file_exists($ext_info['path'].'/styles/'.$forum_user['style'].'/'))
+		$forum_head['style_announcement'] = '<link rel="stylesheet" type="text/css" media="screen" href="'.$ext_info['url'].'/styles/'.$forum_user['style'].'/style.css" />';
+	else
+		$forum_head['style_announcement'] = '<link rel="stylesheet" type="text/css" media="screen" href="'.$ext_info['url'].'/styles/Oxygen/style.css" />';
+}
+		]]></hook>
+
+
+		<hook id="co_modify_url_scheme"><![CDATA[
+if (file_exists($ext_info['path'].'/url/'.$forum_config['o_sef'].'.php'))
+	require $ext_info['path'].'/url/'.$forum_config['o_sef'].'.php';
+else
+	require $ext_info['path'].'/url/Default.php';
+		]]></hook>
+
+		<hook id="re_rewrite_rules"><![CDATA[
+$forum_rewrite_rules['/^(announce|unannounce)[\/_-]?([0-9]+)[\/_-]([0-9]+)[\/_-]([a-z0-9]+)(\.html?|\/)?$/i'] = 'moderate.php?fid=$2&$1=$3&csrf_token=$4';
+		]]></hook>
+
+	</hooks>
+
+</extension>

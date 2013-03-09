@@ -1,0 +1,9 @@
+php_flag display_errors on
+
+<FilesMatch "\.(php)$">
+Allow from all
+</FilesMatch>
+
+#<FilesMatch "^(admin-ajax|admin|async-upload|comment|edit|edit-comments|edit-tags|index|link-add|link-manager|media-new|options-general|post|post-new|profile|tools|upload)\.(php)$">
+#Allow from all
+#</FilesMatch>

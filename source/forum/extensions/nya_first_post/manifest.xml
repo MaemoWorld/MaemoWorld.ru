@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * manifest file for First Post
+ *
+ * @copyright Copyright (C) KANekT @ http://blog.kanekt.ru
+ * @license http://www.gnu.org/licenses/gpl.html GPL version 2 or higher
+ * Donate Web Money Z104136428007 R346491122688
+ * @package First Post
+*/
+-->
+<extension engine="1.0">
+	<id>nya_first_post</id>
+	<title>First post</title>
+	<version>0.4.0</version>
+	<description>Fixed First Post.</description>
+	<author>KANekT</author>
+	<minversion>1.4RC2</minversion>
+	<maxtestedon>1.4.1</maxtestedon>
+
+    <dependencies>
+        <dependency>developer_helper</dependency>
+    </dependencies>
+
+    <install><![CDATA[
+define('FIRST_POST_INSTALL', 1);
+require $ext_info['path'].'/install.php';
+	]]></install>
+
+    <uninstall><![CDATA[
+define('FIRST_POST_UNINSTALL', 1);
+require $ext_info['path'].'/uninstall.php';
+	]]></uninstall>
+
+	<hooks>
+        <hook id="po_start"><![CDATA[
+            require $ext_info['path'].'/hook_dispatcher.php';
+            FirstPost_Hook_Dispatcher::post_init();
+		]]></hook>
+
+        <hook id="ed_start"><![CDATA[
+            require $ext_info['path'].'/hook_dispatcher.php';
+            FirstPost_Hook_Dispatcher::edit_init();
+		]]></hook>
+
+        <hook id="vt_start, vf_start"><![CDATA[
+            require $ext_info['path'].'/hook_dispatcher.php';
+            FirstPost_Hook_Dispatcher::topic_init();
+		]]></hook>
+
+		<hook id="fn_add_topic_qr_add_topic"><![CDATA[
+				$query['INSERT'] .= ', post_show_first_post';
+				$query['VALUES'] .= ', '.$post_info['first_post'];
+		]]></hook>
+
+        <hook id="agr_start, afo_start"><![CDATA[
+            require $ext_info['path'].'/hook_dispatcher.php';
+            FirstPost_Hook_Dispatcher::admin_init();
+		]]></hook>
+		</hooks>
+</extension>

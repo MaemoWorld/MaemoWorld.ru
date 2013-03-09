@@ -1,0 +1,66 @@
+img {
+	border: none;
+}
+a {
+	text-decoration: none;
+}
+a:after {
+	content: " [" attr(href) "]";
+}
+#logo {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+#logo:after {
+	content: "";
+}
+#logo img {
+	width: 64px;
+	height: 64px;
+}
+#title-headers h2 {
+	display: none;
+}
+#body {
+	clear: both;
+}
+#body .box {
+	margin: 0 0 4ex 0;
+}
+#body .box > header h1 a {
+	display: block;
+	font-size: 12pt;
+}
+#body .box p {
+	text-align: justify;
+}
+#body .box > footer address {
+	display: inline-block;
+}
+#body .box > footer address:after {
+	content: ",";
+}
+#body .box > footer time {
+	display: inline-block;
+}
+#body .box > footer .categories h1{
+	display: inline-block;
+	margin: 0;
+	font: inherit;
+}
+#body .box > footer .categories h1:after{
+	content: ": "
+}
+#body .box > footer .comments-link {
+	margin: 0;
+}
+#page-footer {
+	clear: both;
+	margin: 4ex 0 0 0;
+}
+#license-logo {
+	margin: 0 0.5em 0 0;
+}
+#counters {
+	display: none;
+}

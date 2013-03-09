@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension SYSTEM "ext-1.0.dtd">
+
+<!--
+/**
+ *
+ *
+ * @copyright © dimka.linux@gmail.com
+ * @license http://www.gnu.org/licenses/gpl.html GPL version 2 or higher
+ * @package fancy_nick_to_form
+ */
+-->
+
+
+<extension engine="1.0">
+	<id>fancy_nick_to_form</id>
+	<title>Fancy Nick to Form</title>
+	<version>0.1.11</version>
+	<description>Быстрое «обращение» к пользователю</description>
+	<author>dimka.linux@gmail.com</author>
+
+	<minversion>1.3dev</minversion>
+	<maxtestedon>1.3.4</maxtestedon>
+
+	<dependencies>
+		<dependency>jquery</dependency>
+	</dependencies>
+
+
+	<hooks>
+		<hook id="hd_head" priority="6"><![CDATA[
+			if (FORUM_PAGE == 'viewtopic') {
+				$forum_head['fancy_nick_to_form_js'] = '<script type="text/javascript">
+					if (typeof FORUM === "undefined" || !FORUM) {
+						var FORUM = {};
+					}
+
+					FORUM.pasteNickInFastReply = {
+						init: function () {
+							if ($("textarea[name=req_message]").size() > 0) {
+								$(".post-byline").each(function () {
+									var el = $(this).find("a"),
+										name = el.text();
+
+									// create href
+									$("&nbsp; <a href=\"#reqmessage\" title=\"Вставить ник в форму быстрого ответа\" style=\"margin-left: .5em; padding: 0 .5em;\" onclick=\"return FORUM.pasteNickInFastReply.handler(\'"+name+"\');\">⇓</div>").insertAfter(el);
+								});
+							}
+						},
+
+						handler: function (name) {
+							var t = $("textarea[name=req_message]"),
+								v = $(t).val();
+
+							if (t && name) {
+								$(t).val(v+"[b]"+name+"[/b]").focus();
+							}
+
+							return false;
+						}
+					};
+
+					jQuery(function () {
+						FORUM.pasteNickInFastReply.init();
+			 		});</script>';
+			}
+		]]></hook>
+
+
+
+		<hook id="co_common"><![CDATA[
+			$pun_extensions_used = array_merge(isset($pun_extensions_used) ? $pun_extensions_used : array(), array($ext_info['id']));
+		]]></hook>
+
+
+		<hook id="ft_about_end" priority="10"><![CDATA[
+			if (!defined('PUN_EXTENSIONS_USED') && !empty($pun_extensions_used)) {
+				define('PUN_EXTENSIONS_USED', 1);
+				echo '<p id="extensions-used">Currently used extensions: '.implode(', ', $pun_extensions_used).'. Copyright &copy; 2008 <a href="http://punbb.informer.com/">PunBB</a></p>';
+			}
+		]]></hook>
+	</hooks>
+</extension>

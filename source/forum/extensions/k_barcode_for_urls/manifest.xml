@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension SYSTEM "ext-1.0.dtd">
+
+<extension engine="1.0">
+	<id>k_barcode_for_urls</id>
+	<title>Баркоды для тега [url]</title>
+	<version>1.2</version>
+	<description>Добавляет к каждой ссылке, созданной тегом [url], баркод, соответствующий этой ссылке. Полезно для быстрой передачи ссылок на мобильные устройства.</description>
+	<author>KiRiK (kirill.chuvilin.pro)</author>
+
+	<minversion>1.3dev</minversion>
+	<maxtestedon>1.4</maxtestedon>
+
+	<hooks>
+		<hook id="ps_handle_url_tag_end"><![CDATA[
+			if ($bbcode) {
+				if ($full_url == $link)
+					return '[url]'.$link.'[/url]';
+				else
+					return '[url='.$full_url.']'.$link.'[/url]';
+			} else {
+				return '<a href="'.$full_url.'"></a><a class="barcode-url" href="javascript:showBarcode(\''.$full_url.'\')"></a><a href="'.$full_url.'">'.$link.'</a>';
+			}
+		]]></hook>
+		<hook id="hd_head"><![CDATA[
+			$forum_loader->add_js($ext_info['url'].'/functions.js', array('type' => 'url', 'group' => FORUM_JS_GROUP_COUNTER));
+			$forum_loader->add_css($ext_info['url'].'/style.css', array('type' => 'url'));
+			if (file_exists($ext_info['path'].'/style/'.$forum_user['style'].'/style.css'))
+				$forum_loader->add_css($ext_info['url'].'/style/'.$forum_user['style'].'/style.css', array('type' => 'url', 'media' => 'screen'));
+		]]></hook>
+	</hooks>
+
+</extension>

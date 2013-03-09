@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
+<head>
+<title>Screenshot Dumpster</title>
+</head>
+<body>
+<script language="javascript" type="text/javascript">
+<!--
+function insert_code()
+{
+	var bbCode = unescape(document.location.search.substring(1));
+	var messageFields = opener.document.getElementsByTagName('TEXTAREA');
+	
+	for(var i=0; i < messageFields.length; i++)
+	{
+		if(messageFields[i].name == 'req_message')
+		{
+			var messageField = messageFields[i];
+			messageField.value = messageField.value + bbCode;
+			break;
+		}
+	}
+
+	opener.focus();
+	window.close();
+}
+insert_code();
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension SYSTEM "ext-1.0.dtd">
+
+<!--
+/*
+	Copyright (C) 2008 Garciat (Gabriel Garcia T.) <http://garciat.us.to/>
+	Released under GPL license version 3 or any later version <http://www.gnu.org/licenses/gpl.html>
+	
+	This extension is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This extension is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this extension.  If not, see <http://www.gnu.org/licenses/>.
+*/
+-->
+
+<extension engine="1.0">
+	<id>genders</id>
+	<title>Genders</title>
+	<version>1.0</version>
+	<description>Allows users to choose their gender from a custom list.</description>
+	<author>Garciat</author>
+	<minversion>1.3</minversion>
+	<maxtestedon>1.3.2</maxtestedon>
+	
+	<install>
+		<![CDATA[
+if(!defined('EXT_CUR_VERSION'))
+{
+	$new_config = array(
+		'o_genders'		=> "Male\nFemale"
+	);
+
+	foreach($new_config as $key => $value)
+	{
+		if (!isset($forum_config[$key]))
+		{
+			$query = array(
+				'INSERT'	=> 'conf_name, conf_value',
+				'INTO'		=> 'config',
+				'VALUES'	=> '\''.$key.'\', \''.$value.'\''
+			);
+			$forum_db->query_build($query) or error(__FILE__, __LINE__);
+		}
+	}
+	
+	$forum_db->add_field('users', 'gender', 'VARCHAR(50)', true, '');
+}
+		]]>
+	</install>
+	
+	<uninstall>
+		<![CDATA[
+$query = array(
+	'DELETE'	=> 'config',
+	'WHERE'		=> 'conf_name in (\'o_genders\')',
+);
+$forum_db->query_build($query) or error(__FILE__, __LINE__);
+
+$forum_db->drop_field('users', 'gender');
+		]]>
+	</uninstall>
+	
+	<hooks>
+		<hook id="vt_qr_get_posts">
+			<![CDATA[
+if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+	include $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+else
+	include $ext_info['path'].'/lang/English/genders.php';
+
+$query['SELECT'] .= ', u.gender';
+			]]>
+		</hook>
+		<hook id="vt_row_pre_post_ident_merge">
+			<![CDATA[
+if(!empty($cur_post['gender']) && $cur_post['poster_id'] > 1 && $forum_config['o_show_user_info'])
+	$forum_page['author_info']['gender'] = '<li><span>'.$lang_genders['Gender colon'].' <strong> '.forum_htmlencode($cur_post['gender']).'</strong></span></li>';
+			]]>
+		</hook>
+		<hook id="pf_view_details_pre_header_load,pf_change_details_about_output_start">
+			<![CDATA[
+if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+	include $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+else
+	include $ext_info['path'].'/lang/English/genders.php';
+
+function array_place($array, $add_key, $add_value, $after)
+{
+	$narray=array();
+	foreach($array as $key => $value) {
+		$narray[$key] = $value;
+		if($key == $after) $narray[$add_key] = $add_value;
+	}
+	return $narray;
+}
+
+if(!empty($user['gender']))
+{
+	$gender = '<li><span>'.$lang_genders['Gender'].': <strong class="fn">'.forum_htmlencode(($forum_config['o_censoring'] == '1') ? censor_words($user['gender']) : $user['gender']).'</strong></span></li>';
+
+	if ($user['realname'] != '')
+		$forum_page['user_info'] = array_place($forum_page['user_info'], 'gender', $gender, 'realname');
+	else
+		array_unshift($forum_page['user_info'], $gender);
+}
+			]]>
+		</hook>
+		<hook id="pf_change_details_identity_validation">
+			<![CDATA[
+$form['gender'] = (in_array($_POST['form']['gender'], explode("\n", str_replace("\r", '', $forum_config['o_genders'])))) ? $_POST['form']['gender'] : '';
+			]]>
+		</hook>
+		<hook id="pf_change_details_identity_pre_location">
+		<![CDATA[
+if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+	include $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+else
+	include $ext_info['path'].'/lang/English/genders.php';
+?>
+				<div class="sf-set set<?php echo ++$forum_page['item_count'] ?>">
+					<div class="sf-box select">
+						<label for="fld<?php echo ++$forum_page['fld_count'] ?>"><span><?php echo $lang_genders['Gender'] ?></span></label><br />
+						<span class="fld-input"><select id="fld<?php echo $forum_page['fld_count'] ?>" name="form[gender]">
+<?php
+
+			if(empty($forum_user['gender']))
+				echo "\t\t\t\t\t\t".'<option value="" selected="selected">'.$lang_genders['Select'].'</option>'."\n";
+			else
+				echo "\t\t\t\t\t\t".'<option value="">'.$lang_genders['Hide'].'</option>'."\n";
+			
+			foreach (explode("\n", str_replace("\r", '', $forum_config['o_genders'])) as $temp)
+			{
+				if ($forum_user['gender'] == $temp)
+					echo "\t\t\t\t\t\t".'<option value="'.$temp.'" selected="selected">'.forum_htmlencode($temp).'</option>'."\n";
+				else
+					echo "\t\t\t\t\t\t".'<option value="'.$temp.'">'.forum_htmlencode($temp).'</option>'."\n";
+			}
+
+?>
+						</select></span>
+					</div>
+				</div>
+<?php
+			]]>
+		</hook>
+		<hook id="aop_qr_update_permission_option">
+			<![CDATA[
+if($key == 'genders')
+{
+	$temp_qry = array(
+		'SELECT'	=> 'id',
+		'FROM'		=> 'users',
+		'WHERE'		=> 'gender NOT IN (\''.implode("', '", explode("\n", str_replace(array("\r", "'"), '', $value))).'\')',
+	);
+	$temp_res = $forum_db->query_build($temp_qry) or error(__FILE__, __LINE__);
+	while($res = $forum_db->fetch_assoc($temp_res)) $temp_ids[] = $res['id'];
+	
+	if(isset($temp_ids))
+	{
+		$temp_qry = array(
+			'UPDATE'	=> 'users',
+			'SET'		=> 'gender = \'\'',
+			'WHERE'		=> 'id IN (\''.implode("', '", $temp_ids).'\')'
+		);
+		$forum_db->query_build($temp_qry) or error(__FILE__, __LINE__);
+	}
+}
+			]]>
+		</hook>
+		<hook id="aop_features_sig_fieldset_end">
+			<![CDATA[
+if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php'))
+	include $ext_info['path'].'/lang/'.$forum_user['language'].'/'.$ext_info['id'].'.php';
+else
+	include $ext_info['path'].'/lang/English/genders.php';
+
+$forum_page['group_count'] = $forum_page['item_count'] = 0;
+?>
+			<div class="content-head">
+				<h2 class="hn"><span><?php echo $lang_genders['Settings legend'] ?></span></h2>
+			</div>
+			<div class="ct-box">
+				<p><?php echo $lang_genders['Settings note'] ?></p>
+			</div>
+			<fieldset class="frm-group group<?php echo ++$forum_page['group_count'] ?>">
+				<legend class="group-legend"><strong><?php echo $lang_genders['Settings legend'] ?></strong></legend>
+				<div class="txt-set set<?php echo ++$forum_page['item_count'] ?>">
+					<div class="txt-box textarea">
+						<label for="fld<?php echo ++$forum_page['fld_count'] ?>"><span><?php echo $lang_genders['Settings label'] ?></span></label>
+						<div class="txt-input"><span class="fld-input"><textarea id="fld<?php echo $forum_page['fld_count'] ?>" name="form[genders]" rows="5" cols="55"><?php echo forum_htmlencode($forum_config['o_genders']) ?></textarea></span></div>
+					</div>
+				</div>
+			</fieldset>
+<?php
+			]]>
+		</hook>
+	</hooks>
+</extension>

@@ -1,0 +1,1 @@
+<? Header('Location: http://maemoworld.ru/index.php?page=404') ?>

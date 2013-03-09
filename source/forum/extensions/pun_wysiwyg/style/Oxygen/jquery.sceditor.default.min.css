@@ -1,0 +1,65 @@
+html,body,p,code:before {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #111
+}
+
+a:link, a:visited {
+	color: #00579C;
+    text-decoration: none;
+}
+
+ul,ol {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0
+}
+
+table,td {
+	border: 1px dotted #000;
+	empty-cells: show
+}
+
+code:before {
+	position: absolute;
+	content: 'Code:';
+	top: -1.35em;
+	left: 0
+}
+
+code {
+	margin-top: 1.5em;
+	position: relative;
+	background: #eee;
+	border: 1px solid #aaa;
+	white-space: pre;
+	padding: .25em
+}
+
+code:before,code {
+	display: block;
+	text-align: left
+}
+
+blockquote {
+	position: relative;
+
+	
+    margin: 0.75em 1em;
+    padding: 1em 0.75em;	
+	
+	border: 1px solid #ddd;
+    background: none repeat scroll 0 0 #FFFFFF;
+
+}
+
+blockquote cite {
+	font-weight: bold;
+	display: block;
+	font-size: normal;
+	padding-bottom:0.35em;
+	font-style: normal;
+}

@@ -1,0 +1,28 @@
+.brd .main-content .announce .icon {
+	height: 24px;
+	width: 30px;
+	float: left;
+	margin-top: 1.067em;
+	margin-left: -3.057em;
+}
+
+.brd .main-content .announce .icon {
+	background: url(icon_announce_read.png) no-repeat;
+	}
+
+.brd .main-content .announce.closed .icon {
+	background: url(icon_announce_close.png) no-repeat;
+	}
+
+.brd .main-content .announce.new .icon {
+	background: url(icon_announce_new.png) no-repeat;
+	}
+
+.brd .main-content .announce {
+	background: #f6ecec;
+}
+
+.brd .main-content .main-item .hn .item-status em.announce {
+	color: #1d1d1d;
+	font-weight: bold;
+}

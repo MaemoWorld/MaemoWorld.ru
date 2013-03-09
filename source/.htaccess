@@ -1,0 +1,19 @@
+php_flag display_errors on
+
+RewriteEngine on
+
+RewriteRule ^(blog|forum|wiki)$ $1/index.php [L]
+RewriteRule ^(blog|forum|wiki)/$ $1/index.php [L]
+
+RewriteRule ^([^/\.\?]+)$ $1.php [L]
+RewriteRule ^([^/\.\?]+)/$ $1.php [L]
+RewriteRule ^([^/\.\?]+)\?(.*)$ $1.php?$2 [L]
+RewriteRule ^([^/\.\?]+)/\?(.*)$ $1.php?$2 [L]
+RewriteRule ^([^/\.]+)$ htaccess.php [L]
+RewriteRule ^([^/\.]+)\?(.*)$ htaccess.php [L]
+
+#RewriteBase /
+#RewriteRule ^redirect\.php$ - [L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule . /redirect.php [L]

@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Класс, реализующий работу с MySQL.                                          *
+*  Класс базы данных MySQL.                                                    *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *

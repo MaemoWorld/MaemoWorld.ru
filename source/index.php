@@ -29,7 +29,7 @@
 *******************************************************************************/
 
 require_once './include/config.php';
-require_once './include/lib/punbb.php';
+require_once './include/lib/Punbb.php';
 
 switch (General::$contentType) { // в зависимости от типа запрашиваемых данных
 case 'json':

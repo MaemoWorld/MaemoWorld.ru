@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Настроки punbb.                                                             *
+*  Настройки PunBB.                                                            *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -33,8 +33,11 @@ $config['punbb'] = array( // настройки punbb
 	'url' => $config['host_url'].'/forum', // ссылка на punbb
 	'dir' => $config['$root_dir'].'/forum' // каталог punbb
 );
-include_once $config['punbb']['dir'].'/config.php'; // файл с настройками punbb
-include_once $config['punbb']['dir'].'/cache/cache_config.php'; // файл с кэшем punbb
+@include_once '.'.$config['punbb']['dir'].'/config.php'; // файл с настройками punbb
+@include_once '.'.$config['punbb']['dir'].'/cache/cache_config.php'; // файл с кэшем punbb
+// todo: где-то баг с определением путей, поэтому первый вариант не подхватывается
+@include_once '..'.$config['punbb']['dir'].'/config.php'; // файл с настройками punbb
+@include_once '..'.$config['punbb']['dir'].'/cache/cache_config.php'; // файл с кэшем punbb
 $config['punbb']['db'] = array( // настройки для подключения к БД
 	'host'     => $db_host,     // сервер
 	'name'     => $db_name,     // имя базы данных

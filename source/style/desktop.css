@@ -576,7 +576,7 @@ a:hover {
 }
 #page-footer #copyright {
 	float: left;
-	width: 400px;
+	width: 480px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
@@ -679,9 +679,6 @@ a:hover {
 }
 #follow-nav  .livejournal {
 	background: url(./images/follow_livejournal.png) no-repeat top left;
-}
-#follow-nav  .qip {
-	background: url(./images/follow_qip.png) no-repeat top left;
 }
 #follow-nav  .twitter {
 	background: url(./images/follow_twitter.png) no-repeat top left;

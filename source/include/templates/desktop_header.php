@@ -39,19 +39,6 @@ escape(document.referrer)+((typeof(screen)=="undefined")?"":
 screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 ";h"+escape(document.title.substring(0,80))+
 ";"+Math.random();//--></script><!--/LiveInternet-->
-
-<!--Rating@Mail.ru counter-->
-<script><!--
-d=document;var a='';a+=';r='+escape(d.referrer);js=10;//--></script>
-<noscript><img src="http://d4.c6.ba.a1.top.mail.ru/counter?js=na;id=1729709"
-height="1" width="1" alt="top.mail.ru" border="0"></noscript>
-<script><!--
-if(11<js)d.write('--'+'>');//--></script>
-<!--// Rating@Mail.ru counter-->
-
-<!-- begin of Top100 code -->
-<script id="top100Counter" src="http://counter.rambler.ru/top100.jcn?1923911"></script><noscript><img src="http://counter.rambler.ru/top100.cnt?1923911" alt="" width="1" height="1" border="0"/></noscript>
-<!-- end of Top100 code -->
 		</div>
 
 		<? if ((page_type(false) == 'punbb') || (page_type(false) == 'mediawiki')) { ?>
@@ -97,7 +84,6 @@ if(11<js)d.write('--'+'>');//--></script>
 							<li><a class="twitter" title="Twitter" href="http://twitter.com/MaemoWorld_ru"></a></li>
 							<li><a class="livejournal" title="Живой Журнал" href="http://maemoworld.livejournal.com/"></a></li>
 							<li><a class="googlebuzz" title="Google Buzz" href="https://profiles.google.com/maemoworld.ru/buzz"></a></li>
-							<li><a class="qip" title="Микроблоги QIP" href="http://mblogi.qip.ru/people/maemoworld.ru"></a></li>
 							<li><a class="ya" title="Яндекс-блог" href="http://maemoworld-ru.ya.ru/index_blog.xml"></a></li>
 						</ul>
 					</nav>

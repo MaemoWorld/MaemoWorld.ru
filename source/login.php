@@ -30,7 +30,7 @@
 
 require_once 'include.php'; // пути для подключаемых файлов
 require_once 'config.php'; // найтройки
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'lib/Punbb.php'; // работа с punbb
 
 
 switch ($_GET['action']) { // в зависимости от указанного типа действия

@@ -90,3 +90,4 @@ class Yandex { // класс для работы с Yandex.ru
 	private $inButton; // кнопка входа
 	private $idkey; // ???
 }
+?>

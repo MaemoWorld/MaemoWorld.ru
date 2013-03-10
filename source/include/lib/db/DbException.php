@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Класс исключения баз данных.                                                *
+*  Класс исключения базы данных.                                               *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *

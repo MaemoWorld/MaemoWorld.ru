@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Общие настроки.                                                             *
+*  Общие настройки.                                                            *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *

@@ -66,9 +66,9 @@
 				<? } ?>
 				<? if(data('wiki/feeds')) { ?>
 					<li id="feedlinks">
-						<? foreach(data('wiki/feeds') as $key => $feed) { ?>
+						<? /* foreach(data('wiki/feeds') as $key => $feed) { ?>
 							<a id="<? the(Sanitizer::escapeId("feed-$key")) ?>" href="<? the(htmlspecialchars($feed['href'])) ?>" rel="alternate" type="application/<?php echo $key ?>+xml" class="feedlink" <? data('wiiki/skin')->tooltipAndAccesskey('feed-'.$key) ?>><? the(htmlspecialchars($feed['text'])) ?></a>&nbsp;
-						<? } ?>
+						<? } */ ?>
 					</li>
 				<? } ?>
 				<? foreach( array('contributions', 'log', 'blockip', 'emailuser', 'upload', 'specialpages') as $special ) { ?>

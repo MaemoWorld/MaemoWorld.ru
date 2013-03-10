@@ -14,7 +14,7 @@
 			<? if( $tab['class'] ) { ?>
 				class="<? the(htmlspecialchars($tab['class'])) ?>"
 			<? } ?>
-			href="<? the(htmlspecialchars($tab['href'])) ?>"
+			href="<? the($tab['href']) ?>"
 			<? if( in_array( $action, array('edit', 'submit' )) && in_array( $key, array( 'edit', 'watch', 'unwatch' ))) {
 				the(data('wiki/skin')->tooltip('ca-$key'));
 			} else {
@@ -37,10 +37,10 @@
 	<? if(data('wiki/newtalk')) { ?><div class="usermessage"><? data('wiki/newtalk', true)  ?></div><? } ?>
 	<!-- start content -->
 	<? echo data('wiki/bodytext') ?>
-	<? if(data('wiki/catlinks')) { data('wiki/catlinks', true); } ?>
+	<? if(data('wiki/catlinks')) { echo data('wiki/catlinks'); } ?>
 	<!-- end content -->
 	<? if(data('wiki/dataAfterContent')) { data('wiki/dataAfterContent', true); } ?>
-	<div id="forum-comments"></div>
+	<div id="comments"></div>
 <? $bodybox_body = ob_get_clean() ?>
 <? ob_start() ?>
 	<? if( !is_null( data('wiki/viewcount')) && data('wiki/viewcount') ) { ?>

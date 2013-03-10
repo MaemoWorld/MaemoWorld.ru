@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Класс каталога файлов на narod.yandex.ru.                                   *
+*  Класс для работы с каталогом файлов на narod.yandex.ru.                     *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -77,3 +77,4 @@ class YandexCatalog {
 	private $password; // пароль
 	private $fileList; // массив файлов
 }
+?>

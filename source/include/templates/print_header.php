@@ -35,19 +35,6 @@ escape(document.referrer)+((typeof(screen)=="undefined")?"":
 screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 ";h"+escape(document.title.substring(0,80))+
 ";"+Math.random();//--></script><!--/LiveInternet-->
-
-<!--Rating@Mail.ru counter-->
-<script><!--
-d=document;var a='';a+=';r='+escape(d.referrer);js=10;//--></script>
-<noscript><img src="http://d4.c6.ba.a1.top.mail.ru/counter?js=na;id=1729709"
-height="1" width="1" alt="top.mail.ru" border="0"></noscript>
-<script><!--
-if(11<js)d.write('--'+'>');//--></script>
-<!--// Rating@Mail.ru counter-->
-
-<!-- begin of Top100 code -->
-<script id="top100Counter" src="http://counter.rambler.ru/top100.jcn?1923911"></script><noscript><img src="http://counter.rambler.ru/top100.cnt?1923911" alt="" width="1" height="1" border="0"/></noscript>
-<!-- end of Top100 code -->
 		</div>
 
 		<header>

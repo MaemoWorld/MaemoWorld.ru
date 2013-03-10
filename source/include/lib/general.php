@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *                                                                              *
-*  Общие функции.                                                              *
+*  Библиотека с общими функциями.                                              *
 *                                                                              *
 *  Copyright (C) 2010-2012 Kirill Chuvilin.                                    *
 *  Contact: Kirill Chuvilin (kirill.chuvilin@gmail.com, kirill.chuvilin.pro)   *
@@ -27,7 +27,6 @@
 *  $QT_END_LICENSE$                                                            *
 *                                                                              *
 *******************************************************************************/
-
 
 if (!isset($config)) exit('Config must be loaded.'); // выйти, если не загружены настройки
 
@@ -317,7 +316,6 @@ class General {
 
 General::initialize();
 
-
 // Отключение кэширования.
 header('Expires: Thu, 19 Feb 1998 13:24:18 GMT');
 header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
@@ -335,6 +333,6 @@ case 'html':
 case 'embedded_html':
 default:
 	header('Content-type: text/html; charset=utf-8');
-	include_once 'template.php'; // подключить библиотеку шаблонов
+	include_once 'Template.php'; // подключить библиотеку шаблонов
 	General::$data['page']['breadcrumbs'] = array (); // хлебные крошки
 }

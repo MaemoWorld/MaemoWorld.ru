@@ -427,8 +427,8 @@ class Template { // пространство имен шаблонов
 	 * \brief Получить url страницы авторизации.
 	 * \param action тип действия
 	 */
-	 public static function getLoginUrl($action = 'in') {return Template::getHostUrl().'/login?action='.$action;}
-
+//	 public static function getLoginUrl($action = 'in') {return Template::getHostUrl().'/login?action='.$action;}
+	public static function getLoginUrl($action = 'in') {return Template::getForumUrl().'/login.php?action='.$action;}
 
 	/*!
 	 * \brief Получить url страницы регистрации.

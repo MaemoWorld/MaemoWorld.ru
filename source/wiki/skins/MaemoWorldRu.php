@@ -12,7 +12,7 @@ ini_set('include_path', ini_get('include_path').PATHS_SEPARATOR.'..'.PATHS_SEPAR
 global $config, $data;
 require_once 'config.php'; // найтройки 
 $config['templates']['dir'] = '../include/templates/';
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'lib/Punbb.php'; // работа с punbb
 
 
 /**

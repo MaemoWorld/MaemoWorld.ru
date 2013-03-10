@@ -30,7 +30,7 @@
 
 require_once 'include.php'; // пути для подключаемых файлов
 require_once 'config.php'; // найтройки
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'lib/Punbb.php'; // работа с punbb
 
 General::$data['barcode'] = array(); // параметры баркода
 

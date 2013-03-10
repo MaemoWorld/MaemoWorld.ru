@@ -4,7 +4,7 @@
 	<script> 
 		$(document).ready(function() {
 			$.get(
-				'<? host_url() ?>/comments?tid=<? page_comments_topic_id() ?>',
+				'<? host_url() ?>/comments.php?tid=<? page_comments_topic_id() ?>',
 				function(data) {
 					$(comments).html(data);
 //					document.getElementById('comments').innerHTML = data;

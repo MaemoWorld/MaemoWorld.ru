@@ -8,7 +8,7 @@ endif;
 ini_set('include_path', ini_get('include_path').PATHS_SEPARATOR.'..'.PATHS_SEPARATOR.'../content'.PATHS_SEPARATOR.'../include'); // добавляем каталоги 'include' и 'content'
 
 require_once 'config.php'; // найтройки
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'lib/Punbb.php'; // работа с punbb
 $config['templates']['dir'] = '../include/templates/';
 
 $data['page']['powered_by'] = '<a href="http://wordpress.org/">WordPress</a>';

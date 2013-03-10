@@ -30,7 +30,7 @@
 
 require_once 'include.php'; // пути для подключаемых файлов
 require_once 'config.php'; // найтройки
-require_once 'lib/punbb.php'; // работа с punbb
+require_once 'lib/Punbb.php'; // работа с punbb
 
 
 /*!
@@ -88,7 +88,7 @@ if (isset($_GET['tags'])) { // если указаны тэги
 $catalogFiles = scandir($config['punbb_catalogs_dir']); // список файлов каталога
 foreach ($catalogFiles as $fileName) { // по всем файлам каталога
 	if (($fileName == '.') || ($fileName == '..') || ($fileName == '.htaccess')) continue; // игнорировать "." и ".."
-		include_once $config['punbb_catalogs_dir'].$fileName; // подключить файл с описанием каталога
+	include_once $config['punbb_catalogs_dir'].$fileName; // подключить файл с описанием каталога
 }
 General::$data['navigator']['catalogs'] = General::$data['punbb_catalogs']; // список каталогов
 
